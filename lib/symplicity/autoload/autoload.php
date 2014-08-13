@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace lib\astrospace\autoload;
+namespace lib\symplicity\autoload;
 
 class autoload
 {
