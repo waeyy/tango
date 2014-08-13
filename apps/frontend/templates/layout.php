@@ -8,7 +8,7 @@
             if (!empty($title))
                 echo '<title> '.$title.' &bull; Symplicity </title>';
             else
-                echo '<title> Symplicity Framework </title>';
+                echo '<title> Symplicity Framework - Flexible and simple framework php </title>';
             ?>
 
             <link rel="stylesheet" href="/css/style.css" type="text/css" />
