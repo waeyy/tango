@@ -15,7 +15,7 @@ class PDOFactory
 {
     public static function getMysqlConnexion()
     {
-        $db = new \PDO('mysql:host=localhost;dbname=bulbisou', 'root', '');
+        $db = new \PDO('mysql:host=localhost;dbname=symplicity', 'root', '');
         $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         $db->exec("SET NAMES 'utf8'");
 

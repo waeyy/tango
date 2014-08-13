@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace lib\simplicity\app;
+namespace lib\symplicity\app;
 
 class Page extends ApplicationComponent
 {

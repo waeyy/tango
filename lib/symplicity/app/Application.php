@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace lib\astrospace\app;
+namespace lib\symplicity\app;
 
 use lib\symplicity\config\Config;
 use lib\symplicity\config\User;
