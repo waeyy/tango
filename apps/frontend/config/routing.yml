@@ -1,0 +1,16 @@
+# ~/config/routing.yml
+
+# Pattern de détection d'un projet.
+Homepage:
+    url:			/
+    keys:
+        module:		homepage
+        action:		index
+
+# Pattern de détection d'un projet.
+News:
+    url:			/news
+    keys:
+        module:		news
+        action:		index
+    vars:			slug

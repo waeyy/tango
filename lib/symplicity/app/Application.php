@@ -17,6 +17,7 @@ use lib\symplicity\kernel\HTTPRequest;
 use lib\symplicity\kernel\HTTPResponse;
 use lib\symplicity\routing\Route;
 use lib\symplicity\routing\RouteCollection;
+use lib\vendors\Symfony\Component\Yaml\Yaml;
 
 abstract class Application
 {
@@ -39,25 +40,21 @@ abstract class Application
     public function getController()
     {
         $router = new RouteCollection($this);
+        $yaml = Yaml::parse(file_get_contents( PATH_ROOT . '/apps/'.$this->name.'/config/routing.yml'));
 
-        $xml = new \DOMDocument;
-        $xml->load( PATH_ROOT . '/apps/'.$this->name.'/config/routing.xml');
-
-        $routes = $xml->getElementsByTagName('route');
-
-        // On parcoure les routes du fichier XML
-        foreach ($routes as $route)
+        // On parcoure les routes du fichier YAML
+        foreach ($yaml as $key => $value)
         {
             $vars = array();
 
             // On regarde si des variables sont présentes dans l'URL
-            if ($route->hasAttribute('vars'))
+            if (isset($value['vars']))
             {
-                $vars = explode(',', $route->getAttribute('vars'));
+                $vars = explode(',', $value['vars']);
             }
 
             // On ajoute la route au routeur
-            $router->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'), $route->getAttribute('action'), $vars));
+            $router->addRoute(new Route($value['url'], $value['keys']['module'], $value['keys']['action'], $vars));
         }
 
         try

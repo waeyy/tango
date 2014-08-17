@@ -12,6 +12,7 @@
 namespace lib\symplicity\config;
 
 use lib\symplicity\app\ApplicationComponent;
+use lib\vendors\Symfony\Component\Yaml\Yaml;
 
 class Config extends ApplicationComponent
 {
@@ -21,14 +22,11 @@ class Config extends ApplicationComponent
     {
         if (!$this->vars)
         {
-            $xml = new \DOMDocument;
-            $xml->load( PATH_ROOT . '/apps/'.$this->app->name().'/config/config.xml');
+            $yaml = Yaml::parse(file_get_contents( PATH_ROOT . '/apps/'.$this->app->name().'/config/config.yml'));
 
-            $elements = $xml->getElementsByTagName('define');
-
-            foreach ($elements as $element)
+            foreach ($yaml as $key => $value)
             {
-                $this->vars[$element->getAttribute('var')] = $element->getAttribute('value');
+                $this->vars[$key] = $value;
             }
         }
 
