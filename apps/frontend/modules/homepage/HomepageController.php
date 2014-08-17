@@ -18,7 +18,7 @@ class HomepageController extends Controller
 {
     public function executeIndex(HTTPRequest $request)
     {
-        $var = $this->app->config()->get('options_routes');
-        $this->page->addVar('varus', $var);
+        $var = $this->app->config()->get('title_homepage');
+        $this->page->addVar('title_homepage', $var);
     }
 }

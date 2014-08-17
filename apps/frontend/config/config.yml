@@ -1,17 +1,3 @@
 # ~/config/routing.yml
 
-# Pattern de détection d'un projet.
-title:              Yaml Configuration
-
-# Liste des projets actifs.
-_project:           { example: true }
-
-# Projet par défaut.
-_default:           example
-
-# Configuration du traitement des routes.
-options_routes:
-  var_pattern:      "{([a-z0-9]+)}"
-  keys:
-    module:         "[a-z]+"
-    action:         "[a-z]+"
+title_homepage:              Yaml Configuration
