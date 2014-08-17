@@ -1,0 +1,7 @@
+# ~/routing.yml
+
+Homepage:
+    url:			/
+    keys:
+        module:		Homepage
+        action:		index

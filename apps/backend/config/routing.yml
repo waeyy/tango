@@ -1,0 +1,7 @@
+# ~/routing.yml
+
+include_homepage:
+    module:
+        name:           Homepage
+        pattern:        /admin
+        routing:        routing.yml

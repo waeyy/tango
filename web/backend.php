@@ -9,4 +9,12 @@
  * file that was distributed with this source code.
  */
 
-echo '<h1>ADMIN PAGE</h1>';
+define('PATH_ROOT', dirname(dirname(__FILE__)));
+
+include('../lib/symplicity/autoload/autoload.php');
+
+$autoload = new lib\symplicity\autoload\autoload();
+$autoload->register();
+
+$app = new apps\backend\BackendApplication;
+$app->run();
