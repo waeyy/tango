@@ -40,21 +40,37 @@ abstract class Application
     public function getController()
     {
         $router = new RouteCollection($this);
-        $yaml = Yaml::parse(file_get_contents( PATH_ROOT . '/apps/'.$this->name.'/config/routing.yml'));
+        $yaml = Yaml::parse(file_get_contents( PATH_ROOT . '/apps/' . $this->name . '/config/routing.yml'));
 
         // On parcoure les routes du fichier YAML
+        $i = 0;
+        var_dump($yaml);
+        printf('%s', PATH_ROOT . '/apps/' . $this->name . '/config/routing.yml');
         foreach ($yaml as $key => $value)
         {
-            $vars = array();
+            $i++;
+            printf('%s --> %d', $value['module']['name'], $i);
 
-            // On regarde si des variables sont présentes dans l'URL
-            if (isset($value['vars']))
-            {
-                $vars = explode(',', $value['vars']);
-            }
+                $inc = Yaml::parse(file_get_contents( PATH_ROOT . '/apps/' . $this->name . '/modules/' . $value['module']['name'] . '/config/routing.yml'));
 
-            // On ajoute la route au routeur
-            $router->addRoute(new Route($value['url'], $value['keys']['module'], $value['keys']['action'], $vars));
+                foreach ($inc as $keys => $values)
+                {
+                    $vars = array();
+
+                    if (isset($values['vars']))
+                    {
+                        $vars = explode(',', $values['vars']);
+                    }
+
+                    $url = $value['module']['pattern'];
+                    if ($value['module']['pattern'] != $values['url'])
+                        $url .= $values['url'];
+
+
+                }
+
+                $router->addRoute(new Route($url, $values['keys']['module'], $values['keys']['action'], $vars));
+
         }
 
         try

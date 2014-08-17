@@ -1,0 +1,7 @@
+# ~/routing.yml
+
+News:
+    url:			/
+    keys:
+        module:		News
+        action:		index

@@ -1,16 +1,10 @@
 # ~/config/routing.yml
-
-# Pattern de détection d'un projet.
-Homepage:
-    url:			/
-    keys:
-        module:		homepage
-        action:		index
-
-# Pattern de détection d'un projet.
-News:
-    url:			/news
-    keys:
-        module:		news
-        action:		index
-    vars:			slug
+include:
+    module:
+        name:           Homepage
+        pattern:        /
+        routing:        routing.yml
+    module:
+        name:           News
+        pattern:        /news
+        routing:        routing.yml
