@@ -42,10 +42,6 @@ abstract class Application
         $router = new RouteCollection($this);
         $yaml = Yaml::parse(file_get_contents( PATH_ROOT . '/apps/' . $this->name . '/config/routing.yml'));
 
-        // On parcoure les routes du fichier YAML
-        $i = 0;
-        var_dump($yaml);
-        printf('%s', PATH_ROOT . '/apps/' . $this->name . '/config/routing.yml');
         foreach ($yaml as $key => $value)
         {
             $inc = Yaml::parse(file_get_contents( PATH_ROOT . '/apps/' . $this->name . '/modules/' . $value['module']['name'] . '/config/' . $value['module']['routing'] . ''));
@@ -64,7 +60,7 @@ abstract class Application
                     $url .= $values['url'];
 
                 $router->addRoute(new Route($url, $values['keys']['module'], $values['keys']['action'], $vars));
-                }
+            }
         }
 
         try
