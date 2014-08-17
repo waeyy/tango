@@ -1,11 +1,12 @@
-# ~/config/routing.yml
-include:
+# ~/routing.yml
+
+include_homepage:
     module:
         name:           Homepage
         pattern:        /
         routing:        routing.yml
 
-include:
+include_news:
     module:
         name:           News
         pattern:        /news

@@ -48,29 +48,23 @@ abstract class Application
         printf('%s', PATH_ROOT . '/apps/' . $this->name . '/config/routing.yml');
         foreach ($yaml as $key => $value)
         {
-            $i++;
-            printf('%s --> %d', $value['module']['name'], $i);
+            $inc = Yaml::parse(file_get_contents( PATH_ROOT . '/apps/' . $this->name . '/modules/' . $value['module']['name'] . '/config/' . $value['module']['routing'] . ''));
 
-                $inc = Yaml::parse(file_get_contents( PATH_ROOT . '/apps/' . $this->name . '/modules/' . $value['module']['name'] . '/config/routing.yml'));
+            foreach ($inc as $keys => $values)
+            {
+                $vars = array();
 
-                foreach ($inc as $keys => $values)
+                if (isset($values['vars']))
                 {
-                    $vars = array();
-
-                    if (isset($values['vars']))
-                    {
-                        $vars = explode(',', $values['vars']);
-                    }
-
-                    $url = $value['module']['pattern'];
-                    if ($value['module']['pattern'] != $values['url'])
-                        $url .= $values['url'];
-
-
+                    $vars = explode(',', $values['vars']);
                 }
 
-                $router->addRoute(new Route($url, $values['keys']['module'], $values['keys']['action'], $vars));
+                $url = $value['module']['pattern'];
+                if ($value['module']['pattern'] != $values['url'])
+                    $url .= $values['url'];
 
+                $router->addRoute(new Route($url, $values['keys']['module'], $values['keys']['action'], $vars));
+                }
         }
 
         try
