@@ -4,6 +4,8 @@ include:
         name:           Homepage
         pattern:        /
         routing:        routing.yml
+
+include:
     module:
         name:           News
         pattern:        /news
