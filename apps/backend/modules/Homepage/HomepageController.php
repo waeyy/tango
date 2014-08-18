@@ -21,4 +21,9 @@ class HomepageController extends Controller
         $var = $this->app->config()->get('title_homepage');
         $this->page->addVar('title_homepage', $var);
     }
+
+    public function executeGoIndex(HTTPRequest $request)
+    {
+        $this->app->httpResponse()->redirect('admin/');
+    }
 }

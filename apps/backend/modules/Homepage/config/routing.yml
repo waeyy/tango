@@ -1,6 +1,12 @@
 # ~/routing.yml
 
 Homepage:
+    url:			/admin
+    keys:
+        module:		Homepage
+        action:		goIndex
+
+Homepage_:
     url:			/
     keys:
         module:		Homepage
