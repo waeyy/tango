@@ -39,24 +39,22 @@ class Page extends ApplicationComponent
         extract($this->vars);
 
         ob_start();
-        //require $this->contentFile;
         $path_template = PATH_ROOT .'/apps/'. $this->app->name() .'/modules/' . $this->module_name . '/templates';
 
         $loader = new \Twig_Loader_Filesystem($path_template); // Dossier contenant les templates
         $twig = new \Twig_Environment($loader, array(
-            'cache' => false
+            'cache' => false,
         ));
 
         echo $twig->render($this->fileName, $this->vars);
         $content = ob_get_clean();
 
         ob_start();
-        require PATH_ROOT . '/apps/'.$this->app->name().'/templates/layout.php';
-
         $path_layout = PATH_ROOT . '/apps/'.$this->app->name().'/templates/';
         $loader = new \Twig_Loader_Filesystem($path_layout); // Dossier contenant les templates
         $twig = new \Twig_Environment($loader, array(
-            'cache' => false
+            'cache' => false,
+            'autoescape' => false
         ));
         echo $twig->render('layout.html.twig', array(
             'content' => $content
