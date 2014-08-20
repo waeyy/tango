@@ -24,6 +24,10 @@ class autoload
         $file = str_replace('\\', '/', $class) . '.php';
         $filePath = PATH_ROOT . '/' . $file;
 
+        if (false !== strpos($class, 'Twig'))
+        {
+            return false;
+        }
         if(file_exists($filePath)) {
             include $filePath;
             return true;

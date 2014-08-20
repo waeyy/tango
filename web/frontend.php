@@ -12,6 +12,9 @@
 define('PATH_ROOT', dirname(dirname(__FILE__)));
 
 include('../lib/symplicity/autoload/autoload.php');
+include('../lib/vendors/Symfony/Component/Twig/Autoloader.php');
+
+Twig_Autoloader::register();
 
 $autoload = new lib\symplicity\autoload\autoload();
 $autoload->register();

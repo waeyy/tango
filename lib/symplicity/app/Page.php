@@ -13,6 +13,8 @@ namespace lib\symplicity\app;
 
 class Page extends ApplicationComponent
 {
+    protected $module_name;
+    protected $fileName;
     protected $contentFile;
     protected $vars = array();
 
@@ -37,15 +39,37 @@ class Page extends ApplicationComponent
         extract($this->vars);
 
         ob_start();
-        require $this->contentFile;
+        //require $this->contentFile;
+        $path_template = PATH_ROOT .'/apps/'. $this->app->name() .'/modules/' . $this->module_name . '/templates';
+
+        $loader = new \Twig_Loader_Filesystem($path_template); // Dossier contenant les templates
+        $twig = new \Twig_Environment($loader, array(
+            'cache' => false
+        ));
+
+        echo $twig->render($this->fileName, $this->vars);
         $content = ob_get_clean();
 
         ob_start();
         require PATH_ROOT . '/apps/'.$this->app->name().'/templates/layout.php';
+
+        $path_layout = PATH_ROOT . '/apps/'.$this->app->name().'/templates/';
+        $loader = new \Twig_Loader_Filesystem($path_layout); // Dossier contenant les templates
+        $twig = new \Twig_Environment($loader, array(
+            'cache' => false
+        ));
+        echo $twig->render('layout.html.twig', array(
+            'content' => $content
+        ));
         return ob_get_clean();
     }
 
-    public function setContentFile($contentFile)
+    public function setModuleName($name)
+    {
+        $this->module_name = $name;
+    }
+
+    public function setContentFile($contentFile, $fileName)
     {
         if (!is_string($contentFile) || empty($contentFile))
         {
@@ -53,5 +77,7 @@ class Page extends ApplicationComponent
         }
 
         $this->contentFile = $contentFile;
+        $this->fileName = $fileName;
+
     }
 }

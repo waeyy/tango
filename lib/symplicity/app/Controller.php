@@ -78,6 +78,7 @@ abstract class Controller extends ApplicationComponent
         }
 
         $this->view = $view;
-        $this->page->setContentFile( PATH_ROOT . '/apps/'.$this->app->name().'/modules/'.$this->module.'/templates/'.$this->view.'.php');
+        $this->page->setModuleName($this->module);
+        $this->page->setContentFile( PATH_ROOT . '/apps/'.$this->app->name().'/modules/'.$this->module.'/templates/'.$this->view.'.html.twig', $this->view.'.html.twig');
     }
 }
