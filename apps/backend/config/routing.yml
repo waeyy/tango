@@ -5,3 +5,9 @@ include_homepage:
         name:           Homepage
         pattern:        /admin
         routing:        routing.yml
+
+include_news:
+    module:
+        name:           News
+        pattern:        /admin/news
+        routing:        routing.yml

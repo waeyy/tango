@@ -72,7 +72,6 @@ abstract class Application
         {
             if ($e->getCode() == RouteCollection::NO_ROUTE)
             {
-                // Si aucune route ne correspond, c'est que la page demandée n'existe pas
                 $this->httpResponse->redirect404();
             }
         }

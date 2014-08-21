@@ -40,6 +40,9 @@ class Page extends ApplicationComponent
 
         ob_start();
         $path_template = PATH_ROOT .'/apps/'. $this->app->name() .'/modules/' . $this->module_name . '/templates';
+        if (strcmp($this->fileName, '404.html.twig') === 0){
+            $path_template = PATH_ROOT .'/errors/';
+        }
 
         $loader = new \Twig_Loader_Filesystem($path_template); // Dossier contenant les templates
         $twig = new \Twig_Environment($loader, array(

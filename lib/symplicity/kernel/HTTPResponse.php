@@ -32,8 +32,7 @@ class HTTPResponse extends ApplicationComponent
     public function redirect404()
     {
         $this->page = new Page($this->app);
-        $this->page->setContentFile(PATH_ROOT . '/errors/404.html');
-
+        $this->page->setContentFile(PATH_ROOT . '/errors/404.html.twig', '404.html.twig');
         $this->addHeader('HTTP/1.0 404 Not Found');
 
         $this->send();
